@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import TodoForm from '~/components/TodoForm'
-import Todolist from '~/components/Todolist'
+import TodoForm from '~/components/todo/TodoForm'
+import Todolist from '~/components/todo/Todolist'
+import ListUsers from '~/components/user-list/ListUsers'
 type Task ={
   id:number
   text:string
@@ -41,6 +42,10 @@ setTasks((prev) => prev.filter(prev=>prev.id!==id) )
         <h1 className='font-bold text-center text-2xl '>Todo app</h1>
       <TodoForm onsaveTask={handleSetTasks}/>
      <Todolist taskList={tasks} onDeleteTask={deleteTask} onCompleteTask={compleateTask}/> 
+     <div>
+      <h1 className='text-white font-bold text-center'>List All users</h1>
+      <ListUsers/>
+     </div>
       </div>
         </div>
      
