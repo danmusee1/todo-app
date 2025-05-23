@@ -9,6 +9,9 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { UserProvider } from "./contexts/UserContext";
+import { ToastProvider } from "providers/toaster-provider";
+import { ThemeProvider, useTheme } from "./contexts/ThemeContext";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -41,8 +44,29 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+const ThemeSwitcher = () => {
+  const { theme, toggleTheme } = useTheme();
+  return (
+    <div className="flex justify-end w-full">
+    <button onClick={toggleTheme}>
+      Switch to {theme === "light" ? "dark" : "light"} mode
+    </button>
+    </div>
+   
+  );
+}
+
 export default function App() {
-  return <Outlet />;
+  return ( 
+     <ThemeProvider>
+       <UserProvider>
+        <ThemeSwitcher />
+      <Outlet />
+       <ToastProvider />
+    </UserProvider>
+     </ThemeProvider>
+ 
+    )
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

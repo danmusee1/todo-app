@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import UserCard from './UserCard';
 import CreateUser from './CreateUser';
+import { DataTable } from 'components/data-table';
+import { columns } from './components/columns';
 export interface User {
   id: number;
   name: string;
@@ -15,7 +17,11 @@ const ListUsers = () => {
   const [error,setError]= useState('')
 console.log("the users",users)
   useEffect(()=>{
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetchAllUsers()
+  },[])
+
+  const fetchAllUsers = async () =>{
+fetch('https://jsonplaceholder.typicode.com/users')
     .then(res => res.json())
     .then(data =>{
       setUsers(data)
@@ -26,13 +32,15 @@ console.log("the users",users)
       setError(err.message)
       console.error("the error",err)
     })
-  },[])
+  }
   if(loading) return <p className='text-white'>Loading...</p>
     if(error) return <p className='text-white'>{error}</p>
 
   return (
     <div>
-      
+       <div className=" lg:pl-10 lg:pr-10 pr-2 pl-2">
+                  <DataTable columns={columns(fetchAllUsers)}  data={users} />
+                </div>
       <UserCard onList={users}/>
      
     </div>

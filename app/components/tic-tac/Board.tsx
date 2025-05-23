@@ -1,9 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Square from './Square'
 
 const Board = () => {
  const [value, setValue] = useState<string[]>(Array(9).fill(null))
  const [xIsNex,setXIsNext] =useState(true)
+ const [posts,setPosts] = useState([])
+ console.log("the posts",posts)
+ /* useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(res=> res.json())
+   .then(data => {
+setPosts(data)
+
+   }).catch(err =>{
+  console.log("the error",err.message)
+   })
+ },[]) */
+
 
 const validateWinner = (value: string[]): string | null => {
   const lines = [

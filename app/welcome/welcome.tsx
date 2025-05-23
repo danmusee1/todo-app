@@ -5,7 +5,6 @@ import UserParent from '~/components/user-list/UserParent'
 
 
 const Welcome = () => {
-
   return (
    <div className='pt-20 w-full flex justify-center space-x-20'>
        <Link to='/'> home</Link>
